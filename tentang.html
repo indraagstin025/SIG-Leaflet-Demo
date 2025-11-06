@@ -14,38 +14,33 @@
         theme: {
           extend: {
             colors: {
-              primary: tailwind.colors.emerald, // Sesuaikan dengan homepage
+              primary: tailwind.colors.emerald,
             },
           },
         },
       };
     </script>
-    
+
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
       body {
-        font-family: 'Inter', 'sans-serif';
+        font-family: "Inter", "sans-serif";
       }
     </style>
   </head>
 
   <body class="font-sans antialiased bg-primary-50 text-gray-800">
-
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="index.html" class="text-2xl font-extrabold text-primary-700 flex items-center space-x-2">
           <span class="text-3xl">🗺️</span>
           <span>Peta Favorit</span>
         </a>
-        
+
         <div class="flex items-center space-x-4">
-          <a href="index.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
-            Beranda
-          </a>
-          <a href="bantuan.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
-            Bantuan
-          </a>
-          <a href="map.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+          <a href="./index.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300"> Beranda </a>
+          <a href="./bantuan.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300"> Bantuan </a>
+          <a href="./main.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
             Buka Peta
             <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
           </a>
@@ -54,32 +49,28 @@
     </nav>
 
     <main>
-      <section class="py-24" style="background: linear-gradient(180deg, #dcfce7 0%, #f0fdf4 100%);">
+      <section class="py-24" style="background: linear-gradient(180deg, #dcfce7 0%, #f0fdf4 100%)">
         <div class="container mx-auto px-6 text-center">
           <h1 class="text-5xl font-extrabold text-primary-900">Misi Kami</h1>
-          <p class="mt-4 text-xl text-primary-700 max-w-3xl mx-auto">
-            Membantu Anda mengubah peta dunia menjadi jurnal kenangan pribadi yang hidup dan bermakna.
-          </p>
+          <p class="mt-4 text-xl text-primary-700 max-w-3xl mx-auto">Membantu Anda mengubah peta dunia menjadi jurnal kenangan pribadi yang hidup dan bermakna.</p>
         </div>
       </section>
 
       <section class="py-24 bg-white">
         <div class="container mx-auto px-6 max-w-4xl">
           <div class="prose prose-lg prose-emerald max-w-none">
-            
             <h2>Sebuah Peta Lebih dari Sekadar Arah</h2>
             <p>
-              Kita semua memiliki tempat. Tempat di mana Anda pertama kali minum kopi terbaik, taman tempat Anda bersantai, atau sudut jalan dengan pemandangan matahari terbenam yang sempurna. Seringkali, tempat-tempat ini hilang dalam ingatan yang sibuk.
+              Kita semua memiliki tempat. Tempat di mana Anda pertama kali minum kopi terbaik, taman tempat Anda bersantai, atau sudut jalan dengan pemandangan matahari terbenam yang sempurna. Seringkali, tempat-tempat ini hilang dalam
+              ingatan yang sibuk.
             </p>
-            <p>
-              <strong>Peta Favorit</strong> lahir dari ide sederhana: bagaimana jika peta Anda bisa mengingat untuk Anda? Bagaimana jika setiap pin bukan hanya penanda lokasi, tetapi juga penanda kenangan?
-            </p>
+            <p><strong>Peta Favorit</strong> lahir dari ide sederhana: bagaimana jika peta Anda bisa mengingat untuk Anda? Bagaimana jika setiap pin bukan hanya penanda lokasi, tetapi juga penanda kenangan?</p>
 
             <hr class="my-12 border-primary-100" />
 
             <h2>Apa yang Kami Percaya</h2>
             <p>Kami membangun aplikasi ini dengan tiga pilar utama:</p>
-            
+
             <div class="flex items-start gap-4 my-6">
               <span class="flex-shrink-0 bg-primary-600 text-white w-12 h-12 rounded-xl flex items-center justify-center text-xl mt-1">
                 <i class="fa-solid fa-bolt"></i>
@@ -96,7 +87,10 @@
               </span>
               <div>
                 <h3 class="text-xl font-bold m-0">Privasi Anda Utama</h3>
-                <p class="m-0">Semua data lokasi, catatan, dan foto Anda disimpan <strong>langsung di browser Anda</strong> (menggunakan <code>localStorage</code>). Kami tidak pernah melihat, menyentuh, atau menyimpan data pribadi Anda di server kami. Peta Anda adalah milik Anda, seutuhnya.</p>
+                <p class="m-0">
+                  Semua data lokasi, catatan, dan foto Anda disimpan <strong>langsung di browser Anda</strong> (menggunakan <code>localStorage</code>). Kami tidak pernah melihat, menyentuh, atau menyimpan data pribadi Anda di server kami.
+                  Peta Anda adalah milik Anda, seutuhnya.
+                </p>
               </div>
             </div>
 
@@ -110,25 +104,21 @@
               </div>
             </div>
           </div>
-          
+
           <div class="text-center mt-20">
-            <a href="map.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-10 rounded-full transition duration-300 transform hover:scale-105 shadow-xl text-lg">
+            <a href="./main.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-10 rounded-full transition duration-300 transform hover:scale-105 shadow-xl text-lg">
               <i class="fa-solid fa-map-location-dot mr-2"></i>
               Mulai Petakan Kenangan Anda
             </a>
           </div>
-
         </div>
       </section>
     </main>
 
     <footer class="bg-white border-t border-gray-100">
       <div class="container mx-auto px-6 py-8 text-center">
-        <p class="text-gray-500 text-sm">
-          © 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.
-        </p>
+        <p class="text-gray-500 text-sm">© 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.</p>
       </div>
     </footer>
-
   </body>
 </html>

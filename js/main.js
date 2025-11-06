@@ -1,5 +1,3 @@
-// main.js - VERSI LENGKAP (Update Tombol 'Cari Lokasi Saya')
-
 window.onload = function () {
   const DEFAULT_CENTER = [-6.917, 107.619];
   const DEFAULT_ZOOM = 13;
@@ -36,53 +34,39 @@ window.onload = function () {
       maxZoom: 19,
     }).addTo(map);
 
-    // --- KONTROL KUSTOM (Gaya Tombol Zoom) ---
     L.Control.CustomButtons = L.Control.extend({
-      onAdd: function(map) {
-        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+      onAdd: function (map) {
+        const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
         L.DomEvent.disableClickPropagation(container);
 
-        // --- Tombol 1: Cari Lokasi Saya (DIMODIFIKASI) ---
-        const findMeButton = L.DomUtil.create('a', 'leaflet-control-custom-button', container);
-        findMeButton.href = '#';
-        findMeButton.title = 'Cari Lokasi Saya';
+        const findMeButton = L.DomUtil.create("a", "leaflet-control-custom-button", container);
+        findMeButton.href = "#";
+        findMeButton.title = "Cari Lokasi Saya";
         findMeButton.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>';
-    
-        L.DomEvent.on(findMeButton, 'click', L.DomEvent.stop);
-        L.DomEvent.on(findMeButton, 'click', function() {
+
+        L.DomEvent.on(findMeButton, "click", L.DomEvent.stop);
+        L.DomEvent.on(findMeButton, "click", function () {
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
               function (position) {
                 const userCoords = [position.coords.latitude, position.coords.longitude];
                 map.setView(userCoords, 16);
 
-                // --- INI BAGIAN YANG BERUBAH ---
-
-                // 1. Buat objek lokasi sementara
                 const myLocation = {
                   name: "Lokasi Saya Saat Ini",
                   desc: "Lokasi terdeteksi dari GPS.",
                   coords: userCoords,
-                  category: 'default'
+                  category: "default",
                 };
 
-                // 2. Buat konten popup "Simpan" (menggunakan fungsi dari utils.js)
-                //    'false' berarti ini bukan favorit (isFavorite = false)
                 const popupContent = createPopupContent(myLocation, false);
 
-                // 3. Tentukan ikon (biru default)
                 let markerOptions = {};
-                if (typeof customIcons !== 'undefined' && customIcons.default) {
+                if (typeof customIcons !== "undefined" && customIcons.default) {
                   markerOptions.icon = customIcons.default;
                 }
 
-                // 4. Buat marker, ikat popup, dan BUKA popup-nya
-                L.marker(userCoords, markerOptions)
-                  .addTo(map)
-                  .bindPopup(popupContent, { minWidth: 200 })
-                  .openPopup(); // Langsung buka popup
-                
-                // --- AKHIR BAGIAN YANG BERUBAH ---
+                L.marker(userCoords, markerOptions).addTo(map).bindPopup(popupContent, { minWidth: 200 }).openPopup();
               },
               function (error) {
                 let errorMessage = "Error: Tidak bisa mendapatkan lokasi Anda. ";
@@ -97,40 +81,35 @@ window.onload = function () {
             alert("Fitur Geolocation tidak didukung oleh browser Anda.");
           }
         });
-    
-        // --- Tombol 2: Hapus Semua Lokasi (Sama) ---
-        const clearButton = L.DomUtil.create('a', 'leaflet-control-custom-button', container);
-        clearButton.href = '#';
-        clearButton.title = 'Hapus Semua Lokasi';
+
+        const clearButton = L.DomUtil.create("a", "leaflet-control-custom-button", container);
+        clearButton.href = "#";
+        clearButton.title = "Hapus Semua Lokasi";
         clearButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    
-        L.DomEvent.on(clearButton, 'click', L.DomEvent.stop);
-        L.DomEvent.on(clearButton, 'click', function() {
+
+        L.DomEvent.on(clearButton, "click", L.DomEvent.stop);
+        L.DomEvent.on(clearButton, "click", function () {
           if (confirm("Apakah Anda yakin ingin MENGHAPUS SEMUA lokasi? (Ini akan membersihkan favorit DAN menyembunyikan lokasi default).")) {
             localStorage.removeItem("myFavoriteLocations");
-            const allDefaultCoords = defaultLocations.map(loc => loc.coords);
-            localStorage.setItem(HIDDEN_LOCATIONS_KEY, JSON.stringify(allDefaultCoords)); 
+            const allDefaultCoords = defaultLocations.map((loc) => loc.coords);
+            localStorage.setItem(HIDDEN_LOCATIONS_KEY, JSON.stringify(allDefaultCoords));
             alert("Semua lokasi telah dihapus/disembunyikan.");
             location.reload();
           }
         });
-    
+
         return container;
       },
-    
-      onRemove: function(map) {}
-    });
-    
-    new L.Control.CustomButtons({ position: 'topleft' }).addTo(map);
-    // --- AKHIR KONTROL KUSTOM ---
 
-  } // Akhir dari initializeMap()
+      onRemove: function (map) {},
+    });
+
+    new L.Control.CustomButtons({ position: "topleft" }).addTo(map);
+  }
 
   initializeMap();
 
-  // --- FUNGSI GLOBAL (Tidak Berubah) ---
-
-  window.openFavoriteModal = function(lat, lng, name, desc) {
+  window.openFavoriteModal = function (lat, lng, name, desc) {
     map.closePopup();
     if (tempMarker) map.removeLayer(tempMarker);
     tempCoords = [lat, lng];
@@ -140,13 +119,11 @@ window.onload = function () {
     document.querySelector("#location-modal h3").innerText = "Simpan Lokasi Favorit 📌";
     modal.classList.remove("hidden");
     locNameInput.focus();
-  }
+  };
 
-  window.openEditModal = function(lat, lng) {
+  window.openEditModal = function (lat, lng) {
     map.closePopup();
-    const locationToEdit = userLocations.find(loc => 
-      loc.coords[0] === lat && loc.coords[1] === lng
-    );
+    const locationToEdit = userLocations.find((loc) => loc.coords[0] === lat && loc.coords[1] === lng);
     if (!locationToEdit) return;
 
     currentlyEditingCoords = locationToEdit.coords;
@@ -157,24 +134,20 @@ window.onload = function () {
     document.querySelector("#location-modal h3").innerText = "Edit Lokasi Favorit ✏️";
     modal.classList.remove("hidden");
     locNameInput.focus();
-  }
+  };
 
-  window.deleteLocation = function(lat, lng) {
+  window.deleteLocation = function (lat, lng) {
     map.closePopup();
     if (!confirm("Apakah Anda yakin ingin menghapus lokasi ini dari favorit?")) {
       return;
     }
 
-    const indexToRemove = userLocations.findIndex(loc => 
-      loc.coords[0] === lat && loc.coords[1] === lng
-    );
+    const indexToRemove = userLocations.findIndex((loc) => loc.coords[0] === lat && loc.coords[1] === lng);
     if (indexToRemove === -1) return;
 
     const locToRemove = userLocations[indexToRemove];
 
-    const isDefault = defaultLocations.some(defLoc => 
-      defLoc.coords[0] === locToRemove.coords[0] && defLoc.coords[1] === locToRemove.coords[1]
-    );
+    const isDefault = defaultLocations.some((defLoc) => defLoc.coords[0] === locToRemove.coords[0] && defLoc.coords[1] === locToRemove.coords[1]);
 
     if (isDefault) {
       hiddenLocations.push(locToRemove.coords);
@@ -186,28 +159,24 @@ window.onload = function () {
 
     alert("Lokasi favorit telah dihapus.");
     location.reload();
-  }
-
-  // --- Inisialisasi dan Pemuatan Data (Tidak Berubah) ---
+  };
 
   userLocations = JSON.parse(localStorage.getItem("myFavoriteLocations")) || [];
   hiddenLocations = JSON.parse(localStorage.getItem(HIDDEN_LOCATIONS_KEY)) || [];
-  
-  initializeIcons(); 
 
-  const userLocationCoords = new Set(userLocations.map(loc => loc.coords.join(',')));
-  const hiddenLocationCoords = new Set(hiddenLocations.map(coords => coords.join(',')));
+  initializeIcons();
+
+  const userLocationCoords = new Set(userLocations.map((loc) => loc.coords.join(",")));
+  const hiddenLocationCoords = new Set(hiddenLocations.map((coords) => coords.join(",")));
 
   userLocations.forEach((loc) => addMarkerToMap(map, loc, true));
 
   defaultLocations.forEach((loc) => {
-    const coordString = loc.coords.join(',');
+    const coordString = loc.coords.join(",");
     if (!userLocationCoords.has(coordString) && !hiddenLocationCoords.has(coordString)) {
       addMarkerToMap(map, loc, false);
     }
   });
-
-  // --- Event Listener Lainnya (Tidak Berubah) ---
 
   cancelBtnModal.addEventListener("click", function () {
     modal.classList.add("hidden");
@@ -225,9 +194,7 @@ window.onload = function () {
     const file = locImgInput.files[0];
 
     if (currentlyEditingCoords) {
-      const indexToEdit = userLocations.findIndex(loc => 
-        loc.coords[0] === currentlyEditingCoords[0] && loc.coords[1] === currentlyEditingCoords[1]
-      );
+      const indexToEdit = userLocations.findIndex((loc) => loc.coords[0] === currentlyEditingCoords[0] && loc.coords[1] === currentlyEditingCoords[1]);
       if (indexToEdit === -1) return;
 
       userLocations[indexToEdit].name = name;
@@ -249,7 +216,6 @@ window.onload = function () {
       } else {
         handleSave();
       }
-
     } else {
       if (!tempCoords) return;
 
@@ -265,21 +231,19 @@ window.onload = function () {
         modal: modal,
         form: form,
         tempMarker: tempMarker,
-        saveUserLocations: saveUserLocations
+        saveUserLocations: saveUserLocations,
       };
 
       const handleCreate = (data) => {
-        const coordString = data.coords.join(',');
-        const hiddenIndex = hiddenLocationCoords.has(coordString) 
-          ? hiddenLocations.findIndex(coords => coords.join(',') === coordString) 
-          : -1;
+        const coordString = data.coords.join(",");
+        const hiddenIndex = hiddenLocationCoords.has(coordString) ? hiddenLocations.findIndex((coords) => coords.join(",") === coordString) : -1;
 
         if (hiddenIndex > -1) {
           hiddenLocations.splice(hiddenIndex, 1);
           localStorage.setItem(HIDDEN_LOCATIONS_KEY, JSON.stringify(hiddenLocations));
         }
         userLocations = processNewLocation(dependencies, data);
-        location.reload(); 
+        location.reload();
       };
 
       if (file) {
@@ -305,15 +269,14 @@ window.onload = function () {
     map.fitBounds(e.geocode.bbox);
   });
 
-
-  map.on('click', function(e) {
+  map.on("click", function (e) {
     if (currentlyEditingCoords) return;
     map.closePopup();
 
     tempCoords = [e.latlng.lat, e.latlng.lng];
     if (tempMarker) map.removeLayer(tempMarker);
 
-    const defaultIcon = (customIcons && customIcons.default) ? customIcons.default : new L.Icon.Default();
+    const defaultIcon = customIcons && customIcons.default ? customIcons.default : new L.Icon.Default();
     tempMarker = L.marker(tempCoords, { icon: defaultIcon }).addTo(map);
 
     form.reset();

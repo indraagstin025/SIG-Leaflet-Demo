@@ -20,11 +20,11 @@
         },
       };
     </script>
-    
+
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
       body {
-        font-family: 'Inter', 'sans-serif';
+        font-family: "Inter", "sans-serif";
       }
       /* Style untuk 'spoiler' FAQ agar bisa dibuka-tutup */
       details > summary {
@@ -32,7 +32,7 @@
         cursor: pointer;
       }
       details > summary::after {
-        content: '+';
+        content: "+";
         float: right;
         font-size: 1.5rem;
         font-weight: 600;
@@ -40,7 +40,7 @@
         transition: transform 0.2s ease-in-out;
       }
       details[open] > summary::after {
-        content: '−';
+        content: "−";
         transform: rotate(180deg);
       }
       details[open] > summary {
@@ -50,22 +50,17 @@
   </head>
 
   <body class="font-sans antialiased bg-white text-gray-800">
-
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="text-2xl font-extrabold text-primary-700 flex items-center space-x-2">
+        <a href="./index.html" class="text-2xl font-extrabold text-primary-700 flex items-center space-x-2">
           <span class="text-3xl">🗺️</span>
           <span>Peta Favorit</span>
         </a>
-        
+
         <div class="flex items-center space-x-4">
-          <a href="index.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
-            Beranda
-          </a>
-          <a href="tentang.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
-            Tentang Kami
-          </a>
-          <a href="map.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+          <a href="./index.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300"> Beranda </a>
+          <a href="./tentang.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300"> Tentang Kami </a>
+          <a href="./main.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
             Buka Peta
             <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
           </a>
@@ -77,27 +72,18 @@
       <section class="py-24 text-center">
         <div class="container mx-auto px-6">
           <span class="text-primary-600 font-semibold uppercase tracking-wider">Punya Pertanyaan?</span>
-          <h1 class="text-5xl font-extrabold text-primary-900 mt-2">
-            Pusat Bantuan
-          </h1>
-          <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
-            Kami telah mengumpulkan jawaban untuk pertanyaan paling umum di bawah ini.
-          </p>
+          <h1 class="text-5xl font-extrabold text-primary-900 mt-2">Pusat Bantuan</h1>
+          <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">Kami telah mengumpulkan jawaban untuk pertanyaan paling umum di bawah ini.</p>
         </div>
       </section>
 
       <section class="pb-24">
         <div class="container mx-auto px-6 max-w-4xl">
           <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
-            
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-10">
-              Cara Menggunakan
-            </h2>
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-10">Cara Menggunakan</h2>
 
             <details class="py-6 border-b border-gray-200">
-              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
-                Bagaimana cara menyimpan lokasi baru?
-              </summary>
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">Bagaimana cara menyimpan lokasi baru?</summary>
               <div class="prose prose-emerald mt-4 text-gray-600">
                 <p>Ada 3 cara untuk menyimpan lokasi:</p>
                 <ul>
@@ -109,9 +95,7 @@
             </details>
 
             <details class="py-6 border-b border-gray-200">
-              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
-                Bagaimana cara mengedit lokasi favorit saya?
-              </summary>
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">Bagaimana cara mengedit lokasi favorit saya?</summary>
               <div class="prose prose-emerald mt-4 text-gray-600">
                 <p>Setelah Anda menyimpan sebuah lokasi sebagai favorit, penandanya akan berubah (biasanya menjadi kuning atau ikon kustom).</p>
                 <ol>
@@ -122,11 +106,9 @@
                 </ol>
               </div>
             </details>
-            
+
             <details class="py-6 border-b border-gray-200">
-              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
-                Bagaimana cara menghapus lokasi favorit?
-              </summary>
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">Bagaimana cara menghapus lokasi favorit?</summary>
               <div class="prose prose-emerald mt-4 text-gray-600">
                 <p>Mirip dengan mengedit:</p>
                 <ol>
@@ -138,41 +120,38 @@
             </details>
 
             <details class="py-6 border-b border-gray-200">
-              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
-                Apa bedanya "Hapus Favorit" dan "Hapus Semua Lokasi"?
-              </summary>
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">Apa bedanya "Hapus Favorit" dan "Hapus Semua Lokasi"?</summary>
               <div class="prose prose-emerald mt-4 text-gray-600">
                 <ul>
                   <li><strong>Hapus Favorit</strong> (di dalam popup) hanya menghapus satu lokasi favorit yang Anda pilih.</li>
-                  <li><strong>Hapus Semua Lokasi</strong> (tombol <i class="fa-solid fa-trash"></i> di peta) akan MENGATUR ULANG seluruh peta. Ini akan menghapus <strong>semua</strong> favorit Anda dan menyembunyikan <strong>semua</strong> lokasi default, mengembalikan peta ke keadaan kosong.</li>
+                  <li>
+                    <strong>Hapus Semua Lokasi</strong> (tombol <i class="fa-solid fa-trash"></i> di peta) akan MENGATUR ULANG seluruh peta. Ini akan menghapus <strong>semua</strong> favorit Anda dan menyembunyikan
+                    <strong>semua</strong> lokasi default, mengembalikan peta ke keadaan kosong.
+                  </li>
                 </ul>
               </div>
             </details>
-            
+
             <details class="py-6">
-              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
-                Di mana data saya disimpan? Apakah aman?
-              </summary>
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">Di mana data saya disimpan? Apakah aman?</summary>
               <div class="prose prose-emerald mt-4 text-gray-600">
                 <p>Data Anda <strong>100% aman dan pribadi</strong>.</p>
-                <p>Semua informasi—termasuk lokasi, catatan, dan foto—disimpan di <strong><code>localStorage</code> browser Anda sendiri</strong>. Data tersebut tidak pernah dikirim ke server mana pun. Ini berarti hanya Anda yang dapat melihatnya, dari perangkat yang Anda gunakan untuk menyimpannya.</p>
+                <p>
+                  Semua informasi—termasuk lokasi, catatan, dan foto—disimpan di <strong><code>localStorage</code> browser Anda sendiri</strong>. Data tersebut tidak pernah dikirim ke server mana pun. Ini berarti hanya Anda yang dapat
+                  melihatnya, dari perangkat yang Anda gunakan untuk menyimpannya.
+                </p>
                 <p><strong>Peringatan:</strong> Karena data disimpan di browser, jika Anda membersihkan cache atau data situs browser Anda, lokasi favorit Anda akan ikut terhapus.</p>
               </div>
             </details>
-
           </div>
         </div>
       </section>
-
     </main>
 
     <footer class="bg-white border-t border-gray-100">
       <div class="container mx-auto px-6 py-8 text-center">
-        <p class="text-gray-500 text-sm">
-          © 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.
-        </p>
+        <p class="text-gray-500 text-sm">© 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.</p>
       </div>
     </footer>
-
   </body>
 </html>

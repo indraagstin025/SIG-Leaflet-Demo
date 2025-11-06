@@ -90,7 +90,6 @@ function addMarkerToMap(mapInstance, loc, isFavorite) {
   L.marker(loc.coords, markerOptions).addTo(mapInstance).bindPopup(popupContent, { minWidth: 200 });
 }
 
-
 /**
  * Memproses, menyimpan lokasi baru, dan mengelola tampilan UI.
  */

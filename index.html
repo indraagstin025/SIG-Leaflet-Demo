@@ -21,30 +21,27 @@
         },
       };
     </script>
-    
+
     <style>
       /* Font default yang lebih modern */
       body {
-        font-family: 'Inter', 'sans-serif';
+        font-family: "Inter", "sans-serif";
       }
       /* Fallback jika font Inter tidak ada */
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
     </style>
   </head>
 
   <body class="font-sans antialiased bg-primary-50 text-gray-800">
-
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="index.html" class="text-2xl font-extrabold text-primary-700 flex items-center space-x-2">
           <span class="text-3xl">🗺️</span>
           <span>Peta Favorit</span>
         </a>
-        
+
         <div class="flex items-center space-x-4">
-          <a href="#fitur" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
-            Fitur
-          </a>
+          <a href="#fitur" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300"> Fitur </a>
           <a href="map.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
             Buka Peta
             <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
@@ -55,86 +52,63 @@
 
     <main class="relative">
       <div class="absolute top-0 left-0 -z-10 h-96 w-full bg-gradient-to-b from-primary-100 to-primary-50"></div>
-      
+
       <section class="container mx-auto px-6 pt-24 pb-32">
         <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-4xl md:text-6xl font-extrabold text-primary-900 leading-tight">
-            Temukan dan Simpan Setiap Kenangan di Peta Anda
-          </h1>
-          
-          <p class="mt-6 text-lg md:text-xl text-gray-600">
-            Jangan biarkan tempat-tempat berkesan hanya tersimpan di ingatan.
-            Petakan, simpan, tambahkan foto, dan kunjungi kembali kenangan Anda kapan saja.
-          </p>
-          
+          <h1 class="text-4xl md:text-6xl font-extrabold text-primary-900 leading-tight">Temukan dan Simpan Setiap Kenangan di Peta Anda</h1>
+
+          <p class="mt-6 text-lg md:text-xl text-gray-600">Jangan biarkan tempat-tempat berkesan hanya tersimpan di ingatan. Petakan, simpan, tambahkan foto, dan kunjungi kembali kenangan Anda kapan saja.</p>
+
           <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4">
             <a href="./main.html" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-xl text-lg">
               <i class="fa-solid fa-map-location-dot mr-2"></i>
               Mulai Menjelajah
             </a>
-            <a href="#fitur" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-primary-700 font-bold py-4 px-8 rounded-full transition duration-300 border border-gray-200 shadow-lg">
-              Lihat Fitur
-            </a>
+            <a href="#fitur" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-primary-700 font-bold py-4 px-8 rounded-full transition duration-300 border border-gray-200 shadow-lg"> Lihat Fitur </a>
           </div>
         </div>
       </section>
-      
+
       <section id="fitur" class="py-24 bg-white">
         <div class="container mx-auto px-6">
           <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-3xl font-extrabold text-gray-900">
-              Semua yang Anda Butuhkan
-            </h2>
-            <p class="mt-4 text-lg text-gray-500">
-              Alat yang simpel dan intuitif untuk membuat jurnal perjalanan pribadi Anda.
-            </p>
+            <h2 class="text-3xl font-extrabold text-gray-900">Semua yang Anda Butuhkan</h2>
+            <p class="mt-4 text-lg text-gray-500">Alat yang simpel dan intuitif untuk membuat jurnal perjalanan pribadi Anda.</p>
           </div>
-          
+
           <div class="grid md:grid-cols-3 gap-8">
-            
             <div class="bg-primary-50/70 p-8 rounded-xl shadow-lg border border-primary-100 transform hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
               <div class="bg-primary-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-5">
                 <i class="fa-solid fa-map-pin"></i>
               </div>
               <h3 class="text-2xl font-bold text-primary-900 mb-3">Simpan Lokasi Kustom</h3>
-              <p class="text-gray-600">
-                Klik di mana saja pada peta, atau cari alamat, untuk menyimpan lokasi baru Anda dengan mudah.
-              </p>
+              <p class="text-gray-600">Klik di mana saja pada peta, atau cari alamat, untuk menyimpan lokasi baru Anda dengan mudah.</p>
             </div>
-            
+
             <div class="bg-primary-50/70 p-8 rounded-xl shadow-lg border border-primary-100 transform hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
               <div class="bg-primary-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-5">
                 <i class="fa-solid fa-camera-retro"></i>
               </div>
               <h3 class="text-2xl font-bold text-primary-900 mb-3">Tambah Foto & Catatan</h3>
-              <p class="text-gray-600">
-                Bukan hanya pin, tambahkan foto kenangan dan deskripsi untuk membuat lokasi Anda lebih hidup.
-              </p>
+              <p class="text-gray-600">Bukan hanya pin, tambahkan foto kenangan dan deskripsi untuk membuat lokasi Anda lebih hidup.</p>
             </div>
-            
+
             <div class="bg-primary-50/70 p-8 rounded-xl shadow-lg border border-primary-100 transform hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
               <div class="bg-primary-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-5">
                 <i class="fa-solid fa-pencil-alt"></i>
               </div>
               <h3 classs="text-2xl font-bold text-primary-900 mb-3">Edit & Kelola Favorit</h3>
-              <p class="text-gray-600">
-                Data Anda tersimpan aman. Edit, perbarui, atau hapus lokasi favorit Anda kapan saja.
-              </p>
+              <p class="text-gray-600">Data Anda tersimpan aman. Edit, perbarui, atau hapus lokasi favorit Anda kapan saja.</p>
             </div>
-            
           </div>
         </div>
       </section>
 
       <footer class="bg-white border-t border-gray-100">
         <div class="container mx-auto px-6 py-8 text-center">
-          <p class="text-gray-500 text-sm">
-            © 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.
-          </p>
+          <p class="text-gray-500 text-sm">© 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.</p>
         </div>
       </footer>
-      
     </main>
-
   </body>
 </html>
