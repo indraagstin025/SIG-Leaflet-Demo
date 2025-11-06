@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+  <head>
+    <meta charset="UTF-R" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peta Lokasi Favorit | Full Screen Modern</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.5/leaflet.awesome-markers.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+      
+      /* Style Geocoder (Sama) */
+      .leaflet-control-geocoder-form input {
+        border-radius: 0.5rem;
+        border: 1px solid #cbd5e1;
+        padding: 8px 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      }
+      .leaflet-control-geocoder-form input:focus {
+        border-color: #0ea5e9; /* sky-500 */
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+      }
+
+      /* --- CSS BARU (GAYA TOMBOL ZOOM) --- */
+      /* Hapus semua style .leaflet-control-custom-buttons sebelumnya */
+
+      /* Targetkan 'a' tag kustom kita di dalam .leaflet-bar.
+       Leaflet secara otomatis memberi style pada 'a' tag di dalam .leaflet-bar 
+       dengan background putih, border, dan shadow (seperti tombol zoom).
+       Kita hanya perlu mengatur ikon di dalamnya.
+      */
+      .leaflet-bar a.leaflet-control-custom-button {
+          font-size: 1.1rem; /* Ukuran ikon */
+          color: #333; /* Warna ikon */
+          line-height: 28px; /* Penyesuaian vertical-align (tergantung box-sizing Leaflet) */
+          text-align: center;
+          width: 30px; /* Samakan dengan tombol zoom */
+          height: 30px; /* Samakan dengan tombol zoom */
+      }
+      .leaflet-bar a.leaflet-control-custom-button:hover {
+          background-color: #f4f4f4; /* Hover abu-abu muda (standar Leaflet) */
+      }
+      
+      /* Beri warna merah pada ikon 'Hapus' saat di-hover */
+      .leaflet-bar a.leaflet-control-custom-button[title*="Hapus"]:hover {
+          color: #c53030; /* Merah (rose-700) */
+      }
+      
+      /* Pastikan ikon di tengah sempurna */
+      .leaflet-control-custom-button i {
+        display: block;
+        line-height: 28px;
+      }
+
+    </style>
+  </head>
+
+  <body class="h-full flex flex-col font-sans antialiased bg-gradient-to-br from-indigo-50 to-sky-50">
+    
+    <nav class="bg-white/70 backdrop-blur-lg shadow-sm w-full flex-shrink-0 sticky top-0 z-[900]">
+      <div class="container mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
+        <h1 class="text-2xl md:text-3xl font-extrabold text-indigo-700 flex items-center space-x-3">
+          <span class="text-3xl text-sky-600">🗺️</span>
+          <span>Peta Favorit</span>
+        </h1>
+        <ul class="hidden md:flex space-x-7 font-semibold text-sm tracking-wide text-gray-600">
+          <li><a href="./index.html" class="hover:text-sky-600 transition duration-200 uppercase">Beranda</a></li>
+          <li><a href="./tentang.html" class="hover:text-sky-600 transition duration-200 uppercase">Tentang Kami</a></li>
+          <li><a href="./bantuan.html" class="hover:text-sky-600 transition duration-200 uppercase">Bantuan</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="flex-grow z-0">
+      <div id="map"></div>
+    </main>
+
+    <div id="location-modal"
+      class="hidden fixed inset-0 bg-gray-900 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-[1000] p-4">
+      <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg transform transition-all duration-300 ease-out">
+        <h3 class="text-2xl font-extrabold text-sky-800 mb-5 border-b pb-2">Tambahkan Lokasi Baru 📌</h3>
+        <form id="location-form">
+          <div>
+            <label for="loc-name" class="block text-sm font-semibold text-gray-700 mb-1">Nama Lokasi:</label>
+            <input type="text" id="loc-name" required placeholder="Contoh: Kedai Kopi Senja"
+              class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500 transition duration-150" />
+          </div>
+          <div class="mt-4">
+            <label for="loc-desc" class="block text-sm font-semibold text-gray-700 mb-1">Komentar/Deskripsi:</label>
+            <textarea id="loc-desc" rows="3" placeholder="Tuliskan kenangan atau catatan penting..."
+              class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500 transition duration-150"></textarea>
+          </div>
+          <div class="mt-4">
+            <label for="loc-img" class="block text-sm font-semibold text-gray-700 mb-1">Foto (Opsional):</label>
+            <input type="file" id="loc-img" accept="image/*"
+              class="mt-1 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100 cursor-pointer" />
+          </div>
+          <div class="mt-8 flex justify-end space-x-3">
+            <button type="button" id="cancel-btn-modal"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-5 rounded-lg transition duration-300">Batal</button>
+            <button type="submit"
+              class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+              <i class="fa-solid fa-check mr-1"></i> Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.awesome-markers@2.0.2/dist/leaflet.awesome-markers.min.js"></script>
+
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

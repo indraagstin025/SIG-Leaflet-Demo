@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pusat Bantuan | Peta Favorit</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: tailwind.colors.emerald, // Sesuaikan dengan homepage
+            },
+          },
+        },
+      };
+    </script>
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+      body {
+        font-family: 'Inter', 'sans-serif';
+      }
+      /* Style untuk 'spoiler' FAQ agar bisa dibuka-tutup */
+      details > summary {
+        list-style: none;
+        cursor: pointer;
+      }
+      details > summary::after {
+        content: '+';
+        float: right;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #6b7280; /* text-gray-500 */
+        transition: transform 0.2s ease-in-out;
+      }
+      details[open] > summary::after {
+        content: '−';
+        transform: rotate(180deg);
+      }
+      details[open] > summary {
+        color: #047857; /* primary-700 */
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased bg-white text-gray-800">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-extrabold text-primary-700 flex items-center space-x-2">
+          <span class="text-3xl">🗺️</span>
+          <span>Peta Favorit</span>
+        </a>
+        
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
+            Beranda
+          </a>
+          <a href="tentang.html" class="hidden md:block text-gray-600 font-semibold hover:text-primary-600 transition duration-300">
+            Tentang Kami
+          </a>
+          <a href="map.html" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+            Buka Peta
+            <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="bg-primary-50">
+      <section class="py-24 text-center">
+        <div class="container mx-auto px-6">
+          <span class="text-primary-600 font-semibold uppercase tracking-wider">Punya Pertanyaan?</span>
+          <h1 class="text-5xl font-extrabold text-primary-900 mt-2">
+            Pusat Bantuan
+          </h1>
+          <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+            Kami telah mengumpulkan jawaban untuk pertanyaan paling umum di bawah ini.
+          </p>
+        </div>
+      </section>
+
+      <section class="pb-24">
+        <div class="container mx-auto px-6 max-w-4xl">
+          <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
+            
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-10">
+              Cara Menggunakan
+            </h2>
+
+            <details class="py-6 border-b border-gray-200">
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
+                Bagaimana cara menyimpan lokasi baru?
+              </summary>
+              <div class="prose prose-emerald mt-4 text-gray-600">
+                <p>Ada 3 cara untuk menyimpan lokasi:</p>
+                <ul>
+                  <li><strong>Klik Lokasi Default:</strong> Klik pada penanda biru (seperti "Gedung Sate"), lalu klik tombol "Simpan ke Favorit" di dalam popup.</li>
+                  <li><strong>Klik Peta Kosong:</strong> Klik di mana saja di area peta yang kosong. Sebuah penanda biru sementara akan muncul dan modal akan terbuka untuk Anda isi.</li>
+                  <li><strong>Lokasi GPS:</strong> Klik tombol <i class="fa-solid fa-location-crosshairs"></i> di peta. Saat lokasi Anda ditemukan, klik penanda "Lokasi Saya" dan simpan ke favorit.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="py-6 border-b border-gray-200">
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
+                Bagaimana cara mengedit lokasi favorit saya?
+              </summary>
+              <div class="prose prose-emerald mt-4 text-gray-600">
+                <p>Setelah Anda menyimpan sebuah lokasi sebagai favorit, penandanya akan berubah (biasanya menjadi kuning atau ikon kustom).</p>
+                <ol>
+                  <li>Klik pada penanda favorit Anda.</li>
+                  <li>Di dalam popup, klik tombol <strong>"Edit Lokasi"</strong>.</li>
+                  <li>Modal akan terbuka, memungkinkan Anda mengubah nama, deskripsi, atau mengganti foto.</li>
+                  <li>Klik "Simpan" untuk menyimpan perubahan.</li>
+                </ol>
+              </div>
+            </details>
+            
+            <details class="py-6 border-b border-gray-200">
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
+                Bagaimana cara menghapus lokasi favorit?
+              </summary>
+              <div class="prose prose-emerald mt-4 text-gray-600">
+                <p>Mirip dengan mengedit:</p>
+                <ol>
+                  <li>Klik pada penanda favorit yang ingin Anda hapus.</li>
+                  <li>Di dalam popup, klik tombol <strong>"Hapus Favorit"</strong> yang berwarna merah.</li>
+                  <li>Anda akan dimintai konfirmasi. Jika Anda setuju, lokasi tersebut akan dihapus dari daftar favorit Anda.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="py-6 border-b border-gray-200">
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
+                Apa bedanya "Hapus Favorit" dan "Hapus Semua Lokasi"?
+              </summary>
+              <div class="prose prose-emerald mt-4 text-gray-600">
+                <ul>
+                  <li><strong>Hapus Favorit</strong> (di dalam popup) hanya menghapus satu lokasi favorit yang Anda pilih.</li>
+                  <li><strong>Hapus Semua Lokasi</strong> (tombol <i class="fa-solid fa-trash"></i> di peta) akan MENGATUR ULANG seluruh peta. Ini akan menghapus <strong>semua</strong> favorit Anda dan menyembunyikan <strong>semua</strong> lokasi default, mengembalikan peta ke keadaan kosong.</li>
+                </ul>
+              </div>
+            </details>
+            
+            <details class="py-6">
+              <summary class="text-xl font-bold text-gray-800 transition-colors duration-200">
+                Di mana data saya disimpan? Apakah aman?
+              </summary>
+              <div class="prose prose-emerald mt-4 text-gray-600">
+                <p>Data Anda <strong>100% aman dan pribadi</strong>.</p>
+                <p>Semua informasi—termasuk lokasi, catatan, dan foto—disimpan di <strong><code>localStorage</code> browser Anda sendiri</strong>. Data tersebut tidak pernah dikirim ke server mana pun. Ini berarti hanya Anda yang dapat melihatnya, dari perangkat yang Anda gunakan untuk menyimpannya.</p>
+                <p><strong>Peringatan:</strong> Karena data disimpan di browser, jika Anda membersihkan cache atau data situs browser Anda, lokasi favorit Anda akan ikut terhapus.</p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-100">
+      <div class="container mx-auto px-6 py-8 text-center">
+        <p class="text-gray-500 text-sm">
+          © 2024 Peta Favorit. Dibuat dengan 💚 oleh Anda.
+        </p>
+      </div>
+    </footer>
+
+  </body>
+</html>

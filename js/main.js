@@ -1,4 +1,4 @@
-// main.js - VERSI LENGKAP (Gaya Tombol Zoom)
+// main.js - VERSI LENGKAP (Update Tombol 'Cari Lokasi Saya')
 
 window.onload = function () {
   const DEFAULT_CENTER = [-6.917, 107.619];
@@ -36,31 +36,53 @@ window.onload = function () {
       maxZoom: 19,
     }).addTo(map);
 
-    // --- KONTROL KUSTOM (DIMODIFIKASI) ---
+    // --- KONTROL KUSTOM (Gaya Tombol Zoom) ---
     L.Control.CustomButtons = L.Control.extend({
       onAdd: function(map) {
-        // Container utama, HANYA menggunakan kelas leaflet-bar.
-        // Leaflet akan menata ini secara otomatis.
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-    
-        // Mencegah klik di tombol "menembus" ke peta
         L.DomEvent.disableClickPropagation(container);
 
-        // --- Tombol 1: Cari Lokasi Saya (menjadi 'a' tag) ---
+        // --- Tombol 1: Cari Lokasi Saya (DIMODIFIKASI) ---
         const findMeButton = L.DomUtil.create('a', 'leaflet-control-custom-button', container);
         findMeButton.href = '#';
-        findMeButton.title = 'Cari Lokasi Saya'; // Tooltip
-        findMeButton.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>'; // Hanya Ikon
+        findMeButton.title = 'Cari Lokasi Saya';
+        findMeButton.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>';
     
-        // Tambahkan event listener (logika disalin dari 'findMeBtn' lama)
-        L.DomEvent.on(findMeButton, 'click', L.DomEvent.stop); // Mencegah 'a' tag beraksi
+        L.DomEvent.on(findMeButton, 'click', L.DomEvent.stop);
         L.DomEvent.on(findMeButton, 'click', function() {
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
               function (position) {
                 const userCoords = [position.coords.latitude, position.coords.longitude];
                 map.setView(userCoords, 16);
-                L.marker(userCoords).addTo(map).bindPopup("<b>Anda di sini!</b><br>Lokasi Anda saat ini.").openPopup();
+
+                // --- INI BAGIAN YANG BERUBAH ---
+
+                // 1. Buat objek lokasi sementara
+                const myLocation = {
+                  name: "Lokasi Saya Saat Ini",
+                  desc: "Lokasi terdeteksi dari GPS.",
+                  coords: userCoords,
+                  category: 'default'
+                };
+
+                // 2. Buat konten popup "Simpan" (menggunakan fungsi dari utils.js)
+                //    'false' berarti ini bukan favorit (isFavorite = false)
+                const popupContent = createPopupContent(myLocation, false);
+
+                // 3. Tentukan ikon (biru default)
+                let markerOptions = {};
+                if (typeof customIcons !== 'undefined' && customIcons.default) {
+                  markerOptions.icon = customIcons.default;
+                }
+
+                // 4. Buat marker, ikat popup, dan BUKA popup-nya
+                L.marker(userCoords, markerOptions)
+                  .addTo(map)
+                  .bindPopup(popupContent, { minWidth: 200 })
+                  .openPopup(); // Langsung buka popup
+                
+                // --- AKHIR BAGIAN YANG BERUBAH ---
               },
               function (error) {
                 let errorMessage = "Error: Tidak bisa mendapatkan lokasi Anda. ";
@@ -76,14 +98,13 @@ window.onload = function () {
           }
         });
     
-        // --- Tombol 2: Hapus Semua Lokasi (menjadi 'a' tag) ---
+        // --- Tombol 2: Hapus Semua Lokasi (Sama) ---
         const clearButton = L.DomUtil.create('a', 'leaflet-control-custom-button', container);
         clearButton.href = '#';
-        clearButton.title = 'Hapus Semua Lokasi'; // Tooltip
-        clearButton.innerHTML = '<i class="fa-solid fa-trash"></i>'; // Hanya Ikon
+        clearButton.title = 'Hapus Semua Lokasi';
+        clearButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
     
-        // Tambahkan event listener (logika disalin dari 'clearBtn' lama)
-        L.DomEvent.on(clearButton, 'click', L.DomEvent.stop); // Mencegah 'a' tag beraksi
+        L.DomEvent.on(clearButton, 'click', L.DomEvent.stop);
         L.DomEvent.on(clearButton, 'click', function() {
           if (confirm("Apakah Anda yakin ingin MENGHAPUS SEMUA lokasi? (Ini akan membersihkan favorit DAN menyembunyikan lokasi default).")) {
             localStorage.removeItem("myFavoriteLocations");
@@ -97,12 +118,9 @@ window.onload = function () {
         return container;
       },
     
-      onRemove: function(map) {
-        // Tidak perlu melakukan apa-apa di sini
-      }
+      onRemove: function(map) {}
     });
     
-    // Tambahkan kontrol ke peta di posisi 'topleft' (di bawah tombol zoom)
     new L.Control.CustomButtons({ position: 'topleft' }).addTo(map);
     // --- AKHIR KONTROL KUSTOM ---
 
@@ -110,7 +128,7 @@ window.onload = function () {
 
   initializeMap();
 
-  // --- FUNGSI GLOBAL: Simpan, Edit, Hapus (Tidak Berubah) ---
+  // --- FUNGSI GLOBAL (Tidak Berubah) ---
 
   window.openFavoriteModal = function(lat, lng, name, desc) {
     map.closePopup();
