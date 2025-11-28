@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") // You can safely ignore the error on this line.
+}
+
+model Location {
+  id          Int      @id @default(autoincrement())
+  name        String
+  desc        String?  @db.Text
+  latitude    Float
+  longitude   Float
+  category    String   @default("default")
+  img         String?  @db.LongText // Pakai LongText agar muat gambar Base64
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
