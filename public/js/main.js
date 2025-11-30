@@ -1,6 +1,6 @@
 // public/js/main.js (VERSI FULLSTACK)
 
-const API_URL = 'http://localhost:3000/api/locations';
+const API_URL = 'https://sig-leaflet-demo-production.up.railway.app/api/locations';
 
 window.onload = function () {
   const DEFAULT_CENTER = [-6.917, 107.619];
